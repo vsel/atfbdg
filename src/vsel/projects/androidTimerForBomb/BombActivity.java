@@ -74,13 +74,13 @@ public class BombActivity extends Activity {
 	public void onWindowFocusChanged(boolean hasFocus) {
 		super.onWindowFocusChanged(hasFocus);
 		Random r=new Random();
-		int bombTimer=(r.nextInt(30)+30);
+		int bombTimer=(r.nextInt(50)+10);
 		if (hasFocus) {
 			bombAnim.start();
 			Timer timer = new Timer();
 		    MyTimerTask myTimerTask = new MyTimerTask();
 		    timer.schedule(myTimerTask, bombTimer*1000);
-		    log("test"+bombTimer*100);
+		    //log("test"+bombTimer*100);
 		}
 	}
 
