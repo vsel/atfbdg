@@ -1,5 +1,8 @@
 <resources>
 
-    <string name="app_name">atfbdg</string>
+    <string name="app_name">atfbdg-nt1</string>
 
+    <string name="animation_desc">animation</string>
+    <string name="load_button_string">Load</string>
+    <color name="black">#FF000000</color>
 </resources>
