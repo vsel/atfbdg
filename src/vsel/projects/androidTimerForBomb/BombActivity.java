@@ -33,14 +33,9 @@ public class BombActivity extends Activity {
 	private int mSoundID;
 	// Audio volume
 	private float mStreamVolume;
-	
+	//TODO - Add gesture. Start on untap.
 	
 	private void log(String msg) {
-		try {
-			Thread.sleep(500);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 		Log.i("AAA", msg);
 	}
 	public void onCreate(Bundle savedInstanceState) {
@@ -77,6 +72,7 @@ public class BombActivity extends Activity {
 		int bombTimer=(r.nextInt(50)+10);
 		if (hasFocus) {
 			bombAnim.start();
+			// TODO - Add start of tick-tack
 			Timer timer = new Timer();
 		    MyTimerTask myTimerTask = new MyTimerTask();
 		    timer.schedule(myTimerTask, bombTimer*1000);
@@ -89,8 +85,8 @@ public class BombActivity extends Activity {
 		  @Override
 		  public void run() {
 			  bombAnim.stop();
-			  log("working");
-		      //load the sound 
+			  //log("working");
+			  // TODO - Add stop of tick-tack
 		      mSoundPool.play(mSoundID, mStreamVolume, mStreamVolume, 100, 0, 1f);
 		  }	
 		  
