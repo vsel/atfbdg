@@ -35,9 +35,6 @@ public class BombActivity extends Activity {
 	
 		new GestureDetector.SimpleOnGestureListener() {
 		
-		// If a fling gesture starts on a BubbleView then change the
-		// BubbleView's velocity
-		
 		@Override
 		public boolean onSingleTapConfirmed(MotionEvent event) {
 			//if(event.ACTION_POINTER_UP(event.));
@@ -46,7 +43,6 @@ public class BombActivity extends Activity {
 			mpintro.setLooping(true);
 			mpintro.start();
 			bombAnim.start();
-			// TODO - Add start of tick-tack
 			Timer timer = new Timer();
 		    MyTimerTask myTimerTask = new MyTimerTask();
 		    timer.schedule(myTimerTask, bombTimer*1000);
@@ -78,15 +74,14 @@ public class BombActivity extends Activity {
 	}
 	protected void onPause() {
 		// TODO - Release all SoundPool resources
-		super.onPause();
 		mpintro.reset();
 		mpintro=null;
 		mpoutro.reset();
 		mpoutro=null;
+		super.onPause();
 	}
 	public void onResume(Bundle savedInstanceState) {
 		super.onResume();
-		//setupGestureDetector();
 	}
 	
 	@Override
