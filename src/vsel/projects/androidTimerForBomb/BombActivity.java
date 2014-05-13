@@ -8,8 +8,6 @@ package vsel.projects.androidTimerForBomb;
  *
  */
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import com.vsel.atfbdg.R;
 
@@ -30,21 +28,21 @@ public class BombActivity extends Activity {
 	MediaPlayer mpintro,mpoutro;
 	// Gesture Detector
 	private GestureDetector mGestureDetector;
-	//TODO - don`t rerun in portrait mode. Block portrait mode.
-	
-	private static final int DISPLAY_DATA = 1;
+	private static final int BOOM = 1;
     // this handler will receive a delayed message
     private Handler mHandler = new Handler() {
         @Override
 		public void handleMessage(Message msg) {
             // Do task here
-            if (msg.what == DISPLAY_DATA){
+            if (msg.what == BOOM){
             	ImageView imageView = (ImageView) findViewById(R.id.countdown_frame);
-	        	imageView.setBackgroundResource(R.drawable.view_animation2);
+	        	imageView.setBackgroundResource(R.drawable.view_not_animation);
+	        	
 	        	bombAnim = (AnimationDrawable) imageView.getBackground();
 	        	//bombAnim.setVisible(false, false);
-	                //bombAnim.stop();
-	    		mpintro.pause();
+	            //bombAnim.stop();
+	    	
+	        	mpintro.pause();
 	    		mpoutro.start();	
             }
         }
@@ -62,19 +60,22 @@ public class BombActivity extends Activity {
 			//if(event.ACTION_POINTER_UP(event.));
 			Random r=new Random();
 			int bombTimer=(r.nextInt(50)+10);
+			
 			mpintro.setLooping(true);
 			mpintro.start();
+			
 			ImageView imageView = (ImageView) findViewById(R.id.countdown_frame);
 			imageView.setBackgroundResource(R.drawable.view_animation);
+			
 			bombAnim = (AnimationDrawable) imageView.getBackground();
 			bombAnim.start();
-			mHandler.sendEmptyMessageDelayed(DISPLAY_DATA, bombTimer*1000);
+			
+			mHandler.sendEmptyMessageDelayed(BOOM, bombTimer*1000);
 		    return false;
 		}
 	});
 	}
 	public boolean onTouchEvent(MotionEvent event) {
-		// TODO - delegate the touch to the gestureDetector 
 		return mGestureDetector.onTouchEvent(event);
 	}
 	private void log(String msg) {
@@ -95,7 +96,7 @@ public class BombActivity extends Activity {
 		
 	}
 	protected void onPause() {
-		// TODO - Release all SoundPool resources
+		//Release all SoundPool resources
 		mpintro.reset();
 		mpintro=null;
 		mpoutro.reset();
@@ -109,21 +110,6 @@ public class BombActivity extends Activity {
 	@Override
 	public void onWindowFocusChanged(boolean hasFocus) {
 		super.onWindowFocusChanged(hasFocus);
-		/*
-		//Because of getting to gesture
-		Random r=new Random();
-		int bombTimer=(r.nextInt(50)+10);
-		if (hasFocus) {
-		//mpintro.setLooping(true);
-		       mpintro.start();
-		bombAnim.start();
-		// TODO - Add start of tick-tack
-		Timer timer = new Timer();
-		   MyTimerTask myTimerTask = new MyTimerTask();
-		   timer.schedule(myTimerTask, bombTimer*1000);
-		   //log("test"+bombTimer*100);
-		    * 
-		    */
 	}
 	
 }
