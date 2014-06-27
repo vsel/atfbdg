@@ -1,5 +1,6 @@
 /**
- * 
+ * @author vsel
+ *
  */
 package vsel.projects.androidTimerForBomb;
 
@@ -11,10 +12,6 @@ import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 
-/**
- * @author vsel
- *
- */
 public class StartActivity extends Activity {
 	private GestureDetector mGestureDetector;
 	//TODO - don`t rerun in portrait mode. Block portrait mode.
@@ -36,8 +33,21 @@ public class StartActivity extends Activity {
 			intentStarter();
 		    return true;
 		}
+		@Override
+		public boolean onDoubleTap(MotionEvent event) {
+			/*
+			Intent intent = new Intent();
+			//intent.setClassName("vsel.projects.androidTimerForBomb","BombActivity");
+			intent.setClassName("vsel.projects.androidTimerForBomb","BombActivity");
+			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);      
+            finish();*/
+			developerStarter();
+		    return true;
+		}
 	});
 	}
+	
 	public void intentStarter(){
 		Intent intent = new Intent(this,BombActivity.class);
 		//intent.setClassName("vsel.projects.androidTimerForBomb","BombActivity");
@@ -45,17 +55,24 @@ public class StartActivity extends Activity {
         startActivity(intent);      
         finish();
 	}
+	
+	public void developerStarter(){
+		Intent intent = new Intent(this,Developers.class);
+		//intent.setClassName("vsel.projects.androidTimerForBomb","BombActivity");
+		//intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);      
+        finish();
+	}
+	
 	public boolean onTouchEvent(MotionEvent event) {
 		// TODO - delegate the touch to the gestureDetector 
 		return mGestureDetector.onTouchEvent(event);
 	}
 	
 	private final String TAG = "StartActivity";
-protected void onCreate(Bundle savedInstanceState) {
-		
+	protected void onCreate(Bundle savedInstanceState) {
 		// Restore any saved state 
 		super.onCreate(savedInstanceState);
-		
 		// Set content view
 		setContentView(R.layout.startlayout);
 
@@ -83,8 +100,7 @@ protected void onCreate(Bundle savedInstanceState) {
 	@Override
 	protected void onPause() {
 		super.onPause();
-		Log.i(TAG,
-				"onPause()");
+		Log.i(TAG,"onPause()");
 	}
 
 	@Override
