@@ -29,19 +29,17 @@ public class BombActivity extends Activity {
 	// Gesture Detector
 	private GestureDetector mGestureDetector;
 	private static final int BOOM = 1;
-    // this handler will receive a delayed message
-    private Handler mHandler = new Handler() {
+    	// this handler will receive a delayed message
+    	private Handler mHandler = new Handler() {
         @Override
 		public void handleMessage(Message msg) {
             // Do task here
             if (msg.what == BOOM){
             	ImageView imageView = (ImageView) findViewById(R.id.countdown_frame);
 	        	imageView.setBackgroundResource(R.drawable.view_not_animation);
-	        	
 	        	bombAnim = (AnimationDrawable) imageView.getBackground();
 	        	//bombAnim.setVisible(false, false);
-	            //bombAnim.stop();
-	    	
+	            	//bombAnim.stop();
 	        	mpintro.pause();
 	    		mpoutro.start();	
             }
@@ -71,7 +69,8 @@ public class BombActivity extends Activity {
 			bombAnim.start();
 			
 			mHandler.sendEmptyMessageDelayed(BOOM, bombTimer*1000);
-		    return false;
+		  
+		  return false;
 		}
 	});
 	}
@@ -97,9 +96,9 @@ public class BombActivity extends Activity {
 	}
 	protected void onPause() {
 		//Release all SoundPool resources
-		mpintro.reset();
+		mpintro.release();
 		mpintro=null;
-		mpoutro.reset();
+		mpoutro.release();
 		mpoutro=null;
 		super.onPause();
 	}
