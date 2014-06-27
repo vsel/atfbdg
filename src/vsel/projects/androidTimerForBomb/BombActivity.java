@@ -1,16 +1,12 @@
 /**
- * 
- */
-package vsel.projects.androidTimerForBomb;
-
-/**
  * @author vsel
  *
  */
+
+package vsel.projects.androidTimerForBomb;
+
 import java.util.Random;
-
 import com.vsel.atfbdg.R;
-
 import android.app.Activity;
 import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaPlayer;
@@ -31,21 +27,20 @@ public class BombActivity extends Activity {
 	private static final int BOOM = 1;
     	// this handler will receive a delayed message
     	private Handler mHandler = new Handler() {
-        @Override
-		public void handleMessage(Message msg) {
-            // Do task here
-            if (msg.what == BOOM){
-            	ImageView imageView = (ImageView) findViewById(R.id.countdown_frame);
-	        	imageView.setBackgroundResource(R.drawable.view_not_animation);
-	        	bombAnim = (AnimationDrawable) imageView.getBackground();
-	        	//bombAnim.setVisible(false, false);
-	            	//bombAnim.stop();
-	        	mpintro.pause();
-	    		mpoutro.start();	
-            }
-        }
-	
-    };
+    		@Override
+			public void handleMessage(Message msg) {
+	            // Do task here
+	            if (msg.what == BOOM){
+	            	ImageView imageView = (ImageView) findViewById(R.id.countdown_frame);
+		        	imageView.setBackgroundResource(R.drawable.view_not_animation);
+		        	bombAnim = (AnimationDrawable) imageView.getBackground();
+		        	//bombAnim.setVisible(false, false);
+		            	//bombAnim.stop();
+		        	mpintro.pause();
+		    		mpoutro.start();	
+	            }
+	        }
+    	};
         
 	private void setupGestureDetector() {
 	
@@ -72,43 +67,43 @@ public class BombActivity extends Activity {
 		  
 		  return false;
 		}
-	});
-	}
-	public boolean onTouchEvent(MotionEvent event) {
-		return mGestureDetector.onTouchEvent(event);
-	}
-	private void log(String msg) {
-		Log.i("AAA", msg);
-	}
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main);
+		});
+		}
+		public boolean onTouchEvent(MotionEvent event) {
+			return mGestureDetector.onTouchEvent(event);
+		}
+		private void log(String msg) {
+			Log.i("AAA", msg);
+		}
+		public void onCreate(Bundle savedInstanceState) {
+			super.onCreate(savedInstanceState);
+			setContentView(R.layout.main);
+			
+			ImageView imageView = (ImageView) findViewById(R.id.countdown_frame);
+			imageView.setBackgroundResource(R.drawable.view_animation);
+			
+			bombAnim = (AnimationDrawable) imageView.getBackground();
+			
+			mpintro = MediaPlayer.create(this, R.raw.tictak);
+			mpoutro = MediaPlayer.create(this, R.raw.bah);
+			setupGestureDetector();
+			
+		}
+		protected void onPause() {
+			//Release all SoundPool resources
+			mpintro.release();
+			mpintro=null;
+			mpoutro.release();
+			mpoutro=null;
+			super.onPause();
+		}
+		public void onResume(Bundle savedInstanceState) {
+			super.onResume();
+		}
 		
-		ImageView imageView = (ImageView) findViewById(R.id.countdown_frame);
-		imageView.setBackgroundResource(R.drawable.view_animation);
-		
-		bombAnim = (AnimationDrawable) imageView.getBackground();
-		
-		mpintro = MediaPlayer.create(this, R.raw.tictak);
-		mpoutro = MediaPlayer.create(this, R.raw.bah);
-		setupGestureDetector();
-		
-	}
-	protected void onPause() {
-		//Release all SoundPool resources
-		mpintro.release();
-		mpintro=null;
-		mpoutro.release();
-		mpoutro=null;
-		super.onPause();
-	}
-	public void onResume(Bundle savedInstanceState) {
-		super.onResume();
-	}
-	
-	@Override
-	public void onWindowFocusChanged(boolean hasFocus) {
-		super.onWindowFocusChanged(hasFocus);
-	}
+		@Override
+		public void onWindowFocusChanged(boolean hasFocus) {
+			super.onWindowFocusChanged(hasFocus);
+		}
 	
 }
