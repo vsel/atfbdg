@@ -25,12 +25,11 @@
             android:id="@+id/Developer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:gravity="center"
-			android:maxLines="4" 
-            android:singleLine="false"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="62dp"
+            android:layout_marginTop="64dp"
+            android:gravity="center"
+            android:maxLines="4"
+            android:singleLine="false"
             android:text="Developed by Volodymyr Selyukh"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
