@@ -4,4 +4,5 @@
     <string name="animation_desc">animation</string>
     <string name="load_button_string">Load</string>
     <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
 </resources>
