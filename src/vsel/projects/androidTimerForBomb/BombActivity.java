@@ -108,6 +108,11 @@ public class BombActivity extends Activity {
 		
 		@Override
 		protected void onStop() {
+			//Release all SoundPool resources
+			mpintro.release();
+			mpintro=null;
+			mpoutro.release();
+			mpoutro=null;
 			super.onStop();
 		}
 
