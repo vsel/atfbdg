@@ -18,7 +18,6 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.widget.ImageView;
@@ -43,8 +42,6 @@ public class BombActivity extends Activity {
 	            	ImageView imageView = (ImageView) findViewById(R.id.countdown_frame);
 		        	imageView.setBackgroundResource(R.drawable.view_not_animation);
 		        	bombAnim = (AnimationDrawable) imageView.getBackground();
-		        	//bombAnim.setVisible(false, false);
-		            	//bombAnim.stop();
 		        	mpintro.pause();
 		    		mpoutro.start();	
 	            }
@@ -81,9 +78,6 @@ public class BombActivity extends Activity {
 		public boolean onTouchEvent(MotionEvent event) {
 			return mGestureDetector.onTouchEvent(event);
 		}
-		private void log(String msg) {
-			Log.i("AAA", msg);
-		}
 		public void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
 			setContentView(R.layout.main);
@@ -118,6 +112,7 @@ public class BombActivity extends Activity {
 			setupGestureDetector();
 			
 		}
+		
 		@Override
 		protected void onStop() {
 			//Release all SoundPool resources
@@ -130,5 +125,13 @@ public class BombActivity extends Activity {
 			mHandler.removeCallbacks(null);
 			mHandler.removeMessages(BOOM);
 			mHandler = null;
+		}
+		
+		@Override
+		protected void onRestart() {
+			//Release all SoundPool resources
+			super.onRestart();
+			bombAnim.stop();
+			mHandler.removeMessages(BOOM);
 		}
 }
