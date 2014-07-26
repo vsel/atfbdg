@@ -13,6 +13,7 @@ import com.google.android.gms.ads.AdView;
 import com.vsel.atfbdg.R;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -57,6 +58,7 @@ public class BombActivity extends Activity {
 		@Override
 		public boolean onSingleTapConfirmed(MotionEvent event) {
 			//if(event.ACTION_POINTER_UP(event.));
+		    adView.loadAd(new AdRequest.Builder().build());
 			Random r=new Random();
 			int bombTimer=(r.nextInt(50)+10);
 			
@@ -117,21 +119,48 @@ public class BombActivity extends Activity {
 		protected void onStop() {
 			//Release all SoundPool resources
 			super.onStop();
-			mpintro.release();
-			mpintro=null;
-			mpoutro.release();
-			mpoutro=null;
+			if (mpintro != null){
+				mpintro.release();
+				mpintro=null;	
+			}
+			if (mpoutro != null){
+				mpoutro.release();
+				mpoutro=null;
+			}
 			bombAnim.stop();
-			mHandler.removeCallbacks(null);
-			mHandler.removeMessages(BOOM);
-			mHandler = null;
+			if (mHandler != null){
+				mHandler.removeCallbacks(null);
+				mHandler.removeMessages(BOOM);
+				mHandler = null;	
+			}
 		}
 		
 		@Override
 		protected void onRestart() {
-			//Release all SoundPool resources
 			super.onRestart();
-			bombAnim.stop();
-			mHandler.removeMessages(BOOM);
+			Intent intent = new Intent(this,BombActivity.class);
+	        startActivity(intent);      
+	        finish();
 		}
+		
+		 @Override
+		  public void onPause() {
+		    adView.pause();
+			bombAnim.stop();
+			//mHandler.removeMessages(BOOM);
+		    super.onPause();
+		  }
+
+		  @Override
+		  public void onResume() {
+		    super.onResume();
+		    adView.resume();
+		  }
+
+		  @Override
+		  public void onDestroy() {
+		    adView.destroy();
+		    super.onDestroy();
+		  }
+
 }
