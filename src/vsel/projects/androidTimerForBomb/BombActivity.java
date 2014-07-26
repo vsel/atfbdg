@@ -72,7 +72,7 @@ public class BombActivity extends Activity {
 			
 			mHandler.sendEmptyMessageDelayed(BOOM, bombTimer*1000);
 		  
-		  return false;
+		  return true;
 		}
 		});
 		}
@@ -116,18 +116,6 @@ public class BombActivity extends Activity {
 			setupGestureDetector();
 			
 		}
-		protected void onPause() {
-			//Release all SoundPool resources
-			super.onPause();
-			mpintro.release();
-			mpintro=null;
-			mpoutro.release();
-			mpoutro=null;
-		}
-		public void onResume(Bundle savedInstanceState) {
-			super.onResume();
-		}
-		
 		@Override
 		protected void onStop() {
 			//Release all SoundPool resources
@@ -136,6 +124,7 @@ public class BombActivity extends Activity {
 			mpintro=null;
 			mpoutro.release();
 			mpoutro=null;
+			bombAnim.stop();
+			mHandler=null;
 		}
-
 }
