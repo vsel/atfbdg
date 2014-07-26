@@ -11,6 +11,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.vsel.atfbdg.R;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaPlayer;
@@ -33,7 +34,8 @@ public class BombActivity extends Activity {
 	private GestureDetector mGestureDetector;
 	private static final int BOOM = 1;
     	// this handler will receive a delayed message
-    	private Handler mHandler = new Handler() {
+    	@SuppressLint("HandlerLeak")
+		private Handler mHandler = new Handler() {
     		@Override
 			public void handleMessage(Message msg) {
 	            // Do task here
@@ -72,7 +74,7 @@ public class BombActivity extends Activity {
 			
 			mHandler.sendEmptyMessageDelayed(BOOM, bombTimer*1000);
 		  
-		  return true;
+		  return false;
 		}
 		});
 		}
@@ -125,6 +127,8 @@ public class BombActivity extends Activity {
 			mpoutro.release();
 			mpoutro=null;
 			bombAnim.stop();
-			mHandler=null;
+			mHandler.removeCallbacks(null);
+			mHandler.removeMessages(BOOM);
+			mHandler = null;
 		}
 }
