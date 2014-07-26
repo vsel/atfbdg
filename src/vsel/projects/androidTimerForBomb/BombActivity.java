@@ -58,21 +58,23 @@ public class BombActivity extends Activity {
 		@Override
 		public boolean onSingleTapConfirmed(MotionEvent event) {
 			//if(event.ACTION_POINTER_UP(event.));
-		    adView.loadAd(new AdRequest.Builder().build());
-			Random r=new Random();
-			int bombTimer=(r.nextInt(50)+10);
-			
-			mpintro.setLooping(true);
-			mpintro.start();
-			
-			ImageView imageView = (ImageView) findViewById(R.id.countdown_frame);
-			imageView.setBackgroundResource(R.drawable.view_animation);
-			
-			bombAnim = (AnimationDrawable) imageView.getBackground();
-			bombAnim.start();
-			
-			mHandler.sendEmptyMessageDelayed(BOOM, bombTimer*1000);
-		  
+			if (!bombAnim.isRunning()){
+				adView.loadAd(new AdRequest.Builder().build());
+				Random r=new Random();
+				int bombTimer=(r.nextInt(50)+10);
+				
+				mpintro.setLooping(true);
+				mpintro.start();
+				
+				ImageView imageView = (ImageView) findViewById(R.id.countdown_frame);
+				imageView.setBackgroundResource(R.drawable.view_animation);
+				
+				bombAnim = (AnimationDrawable) imageView.getBackground();
+				bombAnim.start();
+				
+				mHandler.sendEmptyMessageDelayed(BOOM, bombTimer*1000);	
+			}
+		    
 		  return false;
 		}
 		});

@@ -32,8 +32,8 @@ public class Developers extends Activity {
 	    // Create an ad request. Check logcat output for the hashed device ID to
 	    // get test ads on a physical device.
 	    AdRequest adRequest = new AdRequest.Builder()
-	        .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-	        .addTestDevice("INSERT_YOUR_HASHED_DEVICE_ID_HERE")
+	        //.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+	        //.addTestDevice("INSERT_YOUR_HASHED_DEVICE_ID_HERE")
 	        .build();
 
 	    // Start loading the ad in the background.
