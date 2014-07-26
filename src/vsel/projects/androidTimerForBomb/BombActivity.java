@@ -113,6 +113,16 @@ public class BombActivity extends Activity {
 			mpoutro = MediaPlayer.create(this, R.raw.bah);
 			setupGestureDetector();
 			
+			//Start when create
+			Random r=new Random();
+			int bombTimer=(r.nextInt(50)+10);
+			
+			mpintro.setLooping(true);
+			mpintro.start();
+
+			bombAnim.start();
+			
+			mHandler.sendEmptyMessageDelayed(BOOM, bombTimer*1000);
 		}
 		
 		@Override
