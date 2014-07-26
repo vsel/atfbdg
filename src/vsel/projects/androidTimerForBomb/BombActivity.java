@@ -129,11 +129,6 @@ public class BombActivity extends Activity {
 		}
 		
 		@Override
-		public void onWindowFocusChanged(boolean hasFocus) {
-			super.onWindowFocusChanged(hasFocus);
-		}
-		
-		@Override
 		protected void onStop() {
 			//Release all SoundPool resources
 			super.onStop();
@@ -143,8 +138,4 @@ public class BombActivity extends Activity {
 			mpoutro=null;
 		}
 
-		@Override
-		protected void onDestroy() {
-			super.onDestroy();
-		}
 }

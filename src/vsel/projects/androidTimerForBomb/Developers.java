@@ -57,10 +57,5 @@ public class Developers extends Activity {
 	    adView.destroy();
 	    super.onDestroy();
 	  }
-	
-	  @Override
-	  protected void onStop() {
-		super.onStop();
-	  }
 
 }
